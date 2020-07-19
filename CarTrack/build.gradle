@@ -2,6 +2,17 @@
 
 buildscript {
     ext.kotlin_version = '1.3.71'
+    ext.retrofitVersion = "2.7.2"
+    ext.retrofitAdapterVersion = "2.6.1"
+    ext.okHttpVersion = "3.14.7"
+    ext.okHttpLoggingVersion = "3.10.0"
+    ext.lifecycle_version = '2.2.0'
+    ext.daggerVersion = '2.23.2'
+    ext.rxJavaVersion3 = "3.0.0"
+    ext.rxJavaVersion2 = "2.2.18"
+    ext.rxAndroidVersion2 = "2.1.1"
+    ext.rxJavaKotlinVersion = "2.4.0"
+
     repositories {
         google()
         jcenter()
