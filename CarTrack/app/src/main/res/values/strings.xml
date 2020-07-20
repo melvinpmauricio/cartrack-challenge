@@ -1,13 +1,32 @@
 <resources>
     <string name="app_name">CarTrack</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_username">Username</string>
-    <string name="action_login">Login</string>
+
+    <!-- Texts -->
     <string name="text_login">Login</string>
     <string name="text_cartrack">Car Track</string>
+    <string name="text_users">Users</string>
+    <string name="text_sort_by">Sort By</string>
+    <string name="text_ascending">Ascending</string>
+    <string name="text_descending">Descending</string>
+    <string name="text_sort_category">Sort Category</string>
+    <string name="text_name">Name</string>
+    <string name="text_email">Email</string>
+    <string name="text_website">Website</string>
+
+    <!-- Actions -->
+    <string name="action_login">Login</string>
+    <string name="action_sort">Sort</string>
+
+    <!-- Hints -->
+    <string name="hint_password">Password</string>
+    <string name="hint_username">Username</string>
+
+    <!-- Error messages -->
     <string name="err_login">Invalid username or password</string>
     <string name="err_username_min_length">Username must at least have %d characters.</string>
     <string name="err_password_min_length">Password must have atleast %d characters.</string>
     <string name="err_username_empty">Please enter username</string>
     <string name="err_password_empty">Please enter password</string>
+    <string name="action_apply">Apply</string>
+    <string name="text_default">Default</string>
 </resources>
