@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="min_username_count">4</integer>
+    <integer name="min_password_count">6</integer>
+
+    <integer name="max_username_count">32</integer>
+    <integer name="max_password_count">24</integer>
+</resources>
