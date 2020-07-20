@@ -62,9 +62,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
 
     // Room
-    implementation "androidx.room:room-runtime:2.2.2"
-    implementation "androidx.room:room-rxjava2:2.2.2"
-    kapt "androidx.room:room-compiler:2.2.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -92,4 +92,6 @@ dependencies {
 
     // Others
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:$schwang_refresh"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:$schwang_refresh"
 }

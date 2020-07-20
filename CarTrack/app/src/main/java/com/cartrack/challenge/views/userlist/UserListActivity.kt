@@ -23,16 +23,36 @@ class UserListActivity : BaseActivity(), OnSortListener {
     override fun bindView() {
         setUpToolbar()
         setUpUserList()
-        viewModel.getUsers()
+        viewModel.getUsers(0)
     }
 
     override fun bindObservers() {
         viewModel.users.observe(this, Observer {
-            adapter.setUsers(it)
+            if (adapter.itemCount == 0) {
+                adapter.setUsers(it.toMutableList())
+            } else {
+                adapter.addUsers(it.toMutableList())
+            }
         })
 
         viewModel.loading.observe(this, Observer {
-            progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            if (it) {
+                if (!refreshUsers.isLoading && !refreshUsers.isRefreshing) {
+                    progressBar.visibility = View.VISIBLE
+                }
+            } else {
+                progressBar.visibility = View.GONE
+                refreshUsers.finishLoadmore()
+                refreshUsers.finishRefresh()
+            }
+        })
+
+        viewModel.isDeleted.observe(this, Observer {
+            adapter.clearUsers()
+        })
+
+        viewModel.isLoadMore.observe(this, Observer {
+            refreshUsers.isEnableLoadmore = it
         })
     }
 
@@ -46,14 +66,22 @@ class UserListActivity : BaseActivity(), OnSortListener {
 
     private fun setUpUserList() {
         adapter = UserListAdapter()
-        rvUserList.adapter = adapter
-
         adapter.onUserClick = { user ->
             val intent = Intent(this, UserMapActivity::class.java).apply {
                 putExtra(UserMapActivity.EXTRA_LAT, user.address.geo.lat)
                 putExtra(UserMapActivity.EXTRA_LNG, user.address.geo.lng)
             }
             startActivity(intent)
+        }
+        rvUserList.adapter = adapter
+
+        refreshUsers.setOnLoadmoreListener {
+            viewModel.getUsers(adapter.itemCount)
+        }
+
+        refreshUsers.setOnRefreshListener {
+            viewModel.deleteUsers()
+            viewModel.getUsers(0)
         }
     }
 
@@ -75,6 +103,7 @@ class UserListActivity : BaseActivity(), OnSortListener {
     }
 
     override fun onSortUsers(category: String, order: String) {
+        adapter.clearUsers()
         viewModel.sortUsers(category, order)
     }
 }

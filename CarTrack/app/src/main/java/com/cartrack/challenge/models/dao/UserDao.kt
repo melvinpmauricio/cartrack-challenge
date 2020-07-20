@@ -11,7 +11,7 @@ import io.reactivex.Single
 interface UserDao {
 
     @RawQuery
-    fun getAllUsersDB(query : SupportSQLiteQuery): Single<List<User>?>
+    fun getAllUsersDB(query: SupportSQLiteQuery): Single<List<User>?>
 
     @Query(
         "SELECT * FROM ${User.TABLE_NAME} WHERE " +
@@ -22,5 +22,8 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUsers(users: List<User>): Completable
+
+    @Query("DELETE FROM ${User.TABLE_NAME}")
+    fun deleteUsers() : Completable
 
 }

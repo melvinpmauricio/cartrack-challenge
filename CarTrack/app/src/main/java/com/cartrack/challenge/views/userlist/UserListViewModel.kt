@@ -10,15 +10,18 @@ import javax.inject.Inject
 class UserListViewModel @Inject constructor(private val repository: UserRepository) :
     BaseViewModel() {
     val users = MutableLiveData<List<User>>()
+    val isDeleted = MutableLiveData<Boolean>()
+    val isLoadMore = MutableLiveData<Boolean>()
 
-    fun getUsers() {
-        disposables.add(repository.getUsers()
+    fun getUsers(count: Int) {
+        disposables.add(repository.getUsers(count, PAGINATION_LIMIT)
             .doOnSubscribe { loading.value = true }
             .doOnTerminate { loading.value = false }
             .subscribe({
                 it?.let { listUsers ->
                     insertUsers(listUsers)
                     users.value = listUsers
+                    isLoadMore.value = listUsers.size == PAGINATION_LIMIT
                 }
             }, {
                 Log.e("Error", "error : ${it.message}")
@@ -33,6 +36,18 @@ class UserListViewModel @Inject constructor(private val repository: UserReposito
         )
     }
 
+    fun deleteUsers() {
+        disposables.add(
+            repository.deleteUsers()
+                .subscribe({
+                    isDeleted.value = true
+                    Log.d("deleteUsers", "Users deleted")
+                }, {
+                    Log.e("Error", "Unable to delete Users from db : ${it.message}")
+                })
+        )
+    }
+
     fun sortUsers(category: String, order: String) {
         disposables.add(
             repository.getUsersDb(category, order)
@@ -44,5 +59,9 @@ class UserListViewModel @Inject constructor(private val repository: UserReposito
                     Log.e("Error", "Unable to get Users from db : ${it.message}")
                 })
         )
+    }
+
+    companion object {
+        const val PAGINATION_LIMIT = 7
     }
 }
