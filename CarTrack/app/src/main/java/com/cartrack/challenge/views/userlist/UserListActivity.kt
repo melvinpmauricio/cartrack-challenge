@@ -1,6 +1,5 @@
 package com.cartrack.challenge.views.userlist
 
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_user_list.*
 import kotlinx.android.synthetic.main.view_progress.*
 import kotlinx.android.synthetic.main.view_toolbar.*
 
-class UserListActivity : BaseActivity(){
+class UserListActivity : BaseActivity(), OnSortListener {
     private lateinit var adapter: UserListAdapter
     private val viewModel by viewModel<UserListViewModel>()
 
@@ -48,7 +47,28 @@ class UserListActivity : BaseActivity(){
         rvUserList.adapter = adapter
 
         adapter.onUserClick = { user ->
-            // TODO Add Map Activity
+            // TODO show map activity
         }
+    }
+
+    private fun showSortFragment() {
+        val sortFragment = SortFragment.newInstance()
+        sortFragment.show(supportFragmentManager, SortFragment.TAG)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_user_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_sort -> showSortFragment()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSortUsers(category: String, order: String) {
+        viewModel.sortUsers(category, order)
     }
 }
