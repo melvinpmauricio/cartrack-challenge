@@ -30,10 +30,6 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
         AndroidInjection.inject(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
         bindView()
         bindObservers()
     }
