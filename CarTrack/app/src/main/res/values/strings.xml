@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">CarTrack</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_username">Username</string>
+    <string name="action_login">Login</string>
+    <string name="text_login">Login</string>
+    <string name="text_cartrack">Car Track</string>
+    <string name="err_login">Invalid username or password</string>
+    <string name="err_username_min_length">Username must at least have %d characters.</string>
+    <string name="err_password_min_length">Password must have atleast %d characters.</string>
+    <string name="err_username_empty">Please enter username</string>
+    <string name="err_password_empty">Please enter password</string>
 </resources>
