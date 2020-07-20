@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_large">
+
+    <TextView
+        android:id="@+id/tvSortByTitle"
+        style="@style/TextStyleBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_sort_by"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/rdgSortBy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:checkedButton="@id/rdoAsc"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tvSortByTitle">
+
+        <RadioButton
+            android:id="@+id/rdoAsc"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@string/text_ascending" />
+
+        <RadioButton
+            android:id="@+id/rdoDesc"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:text="@string/text_descending" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvSortCategory"
+        style="@style/TextStyleBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/text_sort_category"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toBottomOf="@+id/rdgSortBy" />
+
+    <RadioGroup
+        android:id="@+id/rdgSortCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:checkedButton="@id/rdoDefault"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tvSortCategory">
+
+        <RadioButton
+            android:id="@+id/rdoDefault"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@string/text_default" />
+
+        <RadioButton
+            android:id="@+id/rdoName"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@string/text_name" />
+
+        <RadioButton
+            android:id="@+id/rdoEmail"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:text="@string/text_email" />
+
+        <RadioButton
+            android:id="@+id/rdoWebsite"
+            style="@style/TextStyleRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:text="@string/text_website" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnApply"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@drawable/bg_btn_bluegreen_circular_ripple"
+        android:text="@string/action_apply"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/rdgSortCategory" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
