@@ -55,8 +55,8 @@ data class Address(
     val geo: GeoLocation
 )
 data class GeoLocation(
-    val lat: Float,
-    val lng: Float
+    val lat: Double,
+    val lng: Double
 )
 
 data class Company(
