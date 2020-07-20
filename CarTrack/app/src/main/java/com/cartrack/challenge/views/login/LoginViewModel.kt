@@ -8,10 +8,12 @@ import com.cartrack.challenge.models.CarTrackDatabase
 import com.cartrack.challenge.models.Customer
 import com.cartrack.challenge.repository.UserRepository
 import com.cartrack.challenge.utils.StringUtils
+import java.util.*
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val repository: UserRepository) : BaseViewModel() {
     val isLoggedIn = MutableLiveData<Boolean>()
+    val countryList = MutableLiveData<List<String>>()
 
     fun loginUser(username: String, password: String) {
         disposables.add(repository.login(username, password)
@@ -41,6 +43,19 @@ class LoginViewModel @Inject constructor(private val repository: UserRepository)
                 Log.e("Error", "error : ${it.message}")
             })
         )
+    }
+
+    fun showCountries() {
+        val locales = Locale.getAvailableLocales()
+        val countries = ArrayList<String>()
+        locales.forEach {
+            val country = it.displayCountry
+            if (!countries.contains(country) && country.isNotEmpty() && country.isNotBlank()) {
+                countries.add(country)
+            }
+        }
+
+        countryList.value = countries
     }
 
     companion object {
