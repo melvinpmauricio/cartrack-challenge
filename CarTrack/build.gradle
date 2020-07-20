@@ -12,6 +12,8 @@ buildscript {
     ext.rxJavaVersion2 = "2.2.18"
     ext.rxAndroidVersion2 = "2.1.1"
     ext.rxJavaKotlinVersion = "2.4.0"
+    ext.room_version = "2.2.5"
+    ext.schwang_refresh = "1.0.4-7"
 
     repositories {
         google()

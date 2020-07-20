@@ -19,8 +19,8 @@ class UserRepository @Inject constructor(
     private val userService: UserService
 ) {
 
-    fun getUsers(): Flowable<List<User>> {
-        return userService.getUsers()
+    fun getUsers(start: Int, limit: Int): Flowable<List<User>> {
+        return userService.getUsers(start, limit)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -50,5 +50,11 @@ class UserRepository @Inject constructor(
         return userDao.insertUsers(users)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
+    }
+
+    fun deleteUsers(): Completable {
+        return userDao.deleteUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }
