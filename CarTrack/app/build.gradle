@@ -85,4 +85,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion2"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxJavaKotlinVersion"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.2'
+    // Others
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

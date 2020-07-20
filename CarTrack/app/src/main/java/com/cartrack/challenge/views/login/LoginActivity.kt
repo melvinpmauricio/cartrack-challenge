@@ -1,5 +1,6 @@
 package com.cartrack.challenge.views.login
 
+import android.content.Intent
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -8,6 +9,7 @@ import com.cartrack.challenge.base.BaseActivity
 import com.cartrack.challenge.models.CarTrackDatabase
 import com.cartrack.challenge.utils.StringUtils
 import com.cartrack.challenge.utils.Utils
+import com.cartrack.challenge.views.userlist.UserListActivity
 import kotlinx.android.synthetic.main.view_login.*
 
 class LoginActivity : BaseActivity() {
@@ -36,8 +38,7 @@ class LoginActivity : BaseActivity() {
     override fun bindObservers() {
         viewModel.isLoggedIn.observe(this, Observer {
             if (it) {
-                // TODO GO TO Landing Page
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, UserListActivity::class.java))
             }
         })
 
