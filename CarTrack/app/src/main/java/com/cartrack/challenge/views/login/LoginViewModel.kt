@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(private val repository: UserRepository)
             .doOnSubscribe { loading.value = true }
             .doOnTerminate { loading.value = false }
             .subscribe({
-                Log.e("Insert", "inserted")
+                Log.d("Insert", "inserted")
             }, {
                 Log.e("Error", "error : ${it.message}")
             })
