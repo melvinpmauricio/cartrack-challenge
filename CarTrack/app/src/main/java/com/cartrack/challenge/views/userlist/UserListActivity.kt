@@ -1,11 +1,13 @@
 package com.cartrack.challenge.views.userlist
 
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import com.cartrack.challenge.R
 import com.cartrack.challenge.base.BaseActivity
+import com.cartrack.challenge.views.map.UserMapActivity
 import kotlinx.android.synthetic.main.activity_user_list.*
 import kotlinx.android.synthetic.main.view_progress.*
 import kotlinx.android.synthetic.main.view_toolbar.*
@@ -47,7 +49,11 @@ class UserListActivity : BaseActivity(), OnSortListener {
         rvUserList.adapter = adapter
 
         adapter.onUserClick = { user ->
-            // TODO show map activity
+            val intent = Intent(this, UserMapActivity::class.java).apply {
+                putExtra(UserMapActivity.EXTRA_LAT, user.address.geo.lat)
+                putExtra(UserMapActivity.EXTRA_LNG, user.address.geo.lng)
+            }
+            startActivity(intent)
         }
     }
 
