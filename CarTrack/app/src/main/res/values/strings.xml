@@ -29,4 +29,8 @@
     <string name="err_password_empty">Please enter password</string>
     <string name="action_apply">Apply</string>
     <string name="text_default">Default</string>
+    <string name="text_country">Country</string>
+    <string name="text_select_country">Select Country</string>
+    <string name="action_done">Done</string>
+    <string name="err_select_country">Please select country</string>
 </resources>

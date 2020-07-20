@@ -12,8 +12,9 @@ import com.cartrack.challenge.utils.Utils
 import com.cartrack.challenge.views.userlist.UserListActivity
 import kotlinx.android.synthetic.main.view_login.*
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity(), OnCountrySelectedListener {
     private val viewModel by viewModel<LoginViewModel>()
+    private var selectedCountry: String? = null
 
     override fun getLayoutRes(): Int {
         return R.layout.activity_login
@@ -33,6 +34,8 @@ class LoginActivity : BaseActivity() {
         btnLogin.setOnClickListener {
             login(etUsername.text.toString(), etPassword.text.toString())
         }
+
+        tvCountry.setOnClickListener { viewModel.showCountries() }
     }
 
     override fun bindObservers() {
@@ -50,6 +53,11 @@ class LoginActivity : BaseActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        })
+
+        viewModel.countryList.observe(this, Observer {
+            val countryFragment = CountryFragment.newInstance(ArrayList(it), selectedCountry)
+            countryFragment.show(supportFragmentManager, CountryFragment.TAG)
         })
     }
 
@@ -71,11 +79,22 @@ class LoginActivity : BaseActivity() {
         } else if (password.length < minPasswordCount) {
             etPassword.error = getString(R.string.err_password_min_length, minPasswordCount)
             return
+        } else if (selectedCountry == null) {
+            Toast.makeText(this, R.string.err_select_country, Toast.LENGTH_SHORT).show()
+            return
         }
 
         viewModel.loginUser(
             username,
             StringUtils.md5(password)
         )
+    }
+
+    override fun onCountrySelected(country: String?) {
+        this.selectedCountry = country
+        tvCountry.text = ""
+        country?.let {
+            tvCountry.text = country
+        }
     }
 }
