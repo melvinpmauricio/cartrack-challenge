@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.cartrack.challenge.R
 import com.cartrack.challenge.base.BaseActivity
-import com.cartrack.challenge.models.CarTrackDatabase
+import com.cartrack.challenge.models.CarTrackError
 import com.cartrack.challenge.utils.StringUtils
 import com.cartrack.challenge.utils.Utils
 import com.cartrack.challenge.views.userlist.UserListActivity
@@ -45,9 +45,9 @@ class LoginActivity : BaseActivity(), OnCountrySelectedListener {
             }
         })
 
-        viewModel.errorCode.observe(this, Observer {
-            when (it) {
-                CarTrackDatabase.EMPTY_RESULT_SET -> Toast.makeText(
+        viewModel.error.observe(this, Observer {
+            when (it.errorCode) {
+                CarTrackError.ERR_DB_EMPTY_RESULT_SET -> Toast.makeText(
                     this,
                     R.string.err_login,
                     Toast.LENGTH_SHORT

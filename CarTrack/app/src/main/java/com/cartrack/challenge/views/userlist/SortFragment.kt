@@ -59,7 +59,7 @@ class SortFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        // Incase we do have argument(s), apply
+        // In case we do have argument(s), apply
         fun newInstance() = SortFragment().apply {
             arguments = Bundle().apply {
 

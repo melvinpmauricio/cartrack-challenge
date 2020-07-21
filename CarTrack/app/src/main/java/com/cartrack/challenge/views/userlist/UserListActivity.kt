@@ -7,7 +7,10 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.cartrack.challenge.R
 import com.cartrack.challenge.base.BaseActivity
+import com.cartrack.challenge.models.CarTrackError
+import com.cartrack.challenge.views.login.LoginActivity
 import com.cartrack.challenge.views.map.UserMapActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_user_list.*
 import kotlinx.android.synthetic.main.view_progress.*
 import kotlinx.android.synthetic.main.view_toolbar.*
@@ -54,14 +57,31 @@ class UserListActivity : BaseActivity(), OnSortListener {
         viewModel.isLoadMore.observe(this, Observer {
             refreshUsers.isEnableLoadmore = it
         })
+
+        viewModel.error.observe(this, Observer {
+            when (it.errorCode) {
+                CarTrackError.ERR_UNKNOWN_ERROR -> {
+                    it.errorMessage?.let { errMsg ->
+                        Snackbar.make(
+                            findViewById(android.R.id.content),
+                            errMsg,
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        })
     }
 
     private fun setUpToolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        ivBack.setOnClickListener { finish() }
         tvTitle.text = getString(R.string.text_users)
+        ivBack.setOnClickListener {
+            viewModel.deleteUsers()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 
     private fun setUpUserList() {

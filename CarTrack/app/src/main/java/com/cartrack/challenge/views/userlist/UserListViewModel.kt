@@ -3,6 +3,7 @@ package com.cartrack.challenge.views.userlist
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.cartrack.challenge.base.BaseViewModel
+import com.cartrack.challenge.models.CarTrackError
 import com.cartrack.challenge.models.User
 import com.cartrack.challenge.repository.UserRepository
 import javax.inject.Inject
@@ -20,19 +21,12 @@ class UserListViewModel @Inject constructor(private val repository: UserReposito
             .subscribe({
                 it?.let { listUsers ->
                     insertUsers(listUsers)
-                    users.value = listUsers
                     isLoadMore.value = listUsers.size == PAGINATION_LIMIT
                 }
             }, {
-                Log.e("Error", "error : ${it.message}")
+                loading.value = false
+                error.value = CarTrackError(CarTrackError.ERR_UNKNOWN_ERROR, it.message)
             })
-        )
-    }
-
-    private fun insertUsers(users: List<User>) {
-        disposables.add(
-            repository.insertUsers(users)
-                .subscribe()
         )
     }
 
@@ -43,7 +37,8 @@ class UserListViewModel @Inject constructor(private val repository: UserReposito
                     isDeleted.value = true
                     Log.d("deleteUsers", "Users deleted")
                 }, {
-                    Log.e("Error", "Unable to delete Users from db : ${it.message}")
+                    loading.value = false
+                    error.value = CarTrackError(CarTrackError.ERR_DB_FAIL_DELETE, it.message)
                 })
         )
     }
@@ -56,7 +51,20 @@ class UserListViewModel @Inject constructor(private val repository: UserReposito
                         users.value = sortedUsers
                     }
                 }, {
-                    Log.e("Error", "Unable to get Users from db : ${it.message}")
+                    loading.value = false
+                    error.value = CarTrackError(CarTrackError.ERR_DB_FAIL_QUERY, it.message)
+                })
+        )
+    }
+
+    private fun insertUsers(listUsers: List<User>) {
+        disposables.add(
+            repository.insertUsers(listUsers)
+                .subscribe({
+                    users.value = listUsers
+                }, {
+                    loading.value = false
+                    error.value = CarTrackError(CarTrackError.ERR_DB_FAIL_INSERT, it.message)
                 })
         )
     }

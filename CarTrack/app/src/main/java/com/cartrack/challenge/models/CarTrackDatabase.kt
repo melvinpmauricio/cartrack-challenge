@@ -16,8 +16,5 @@ abstract class CarTrackDatabase : RoomDatabase() {
     companion object {
         const val VERSION = 3
         const val DB_NAME = "CARTRACK_DATABASE"
-
-        // Exception Codes
-        const val EMPTY_RESULT_SET = 40001
     }
 }
