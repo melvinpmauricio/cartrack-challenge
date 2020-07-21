@@ -19,7 +19,6 @@ class UserMapActivity : BaseActivity(), OnMapReadyCallback {
     override fun bindView() {
         setToolbar()
         setMap()
-
     }
 
     override fun bindObservers() {

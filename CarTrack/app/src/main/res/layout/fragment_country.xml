@@ -8,12 +8,29 @@
     <TextView
         android:id="@+id/tvSelectCountry"
         style="@style/TextStyleBold"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingBottom="@dimen/margin_small"
         android:text="@string/text_select_country"
         android:textSize="@dimen/text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textColor="@color/colorAccent"
+        android:background="?attr/selectableItemBackground"
+        android:text="@string/action_cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSelectCountry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSelectCountry" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsvCountries"

@@ -73,6 +73,10 @@ class CountryFragment : BottomSheetDialogFragment() {
             }
             dialog?.dismiss()
         }
+
+        btnCancel.setOnClickListener {
+            dialog?.dismiss()
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

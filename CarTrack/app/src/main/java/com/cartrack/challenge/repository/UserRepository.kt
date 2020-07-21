@@ -49,7 +49,7 @@ class UserRepository @Inject constructor(
     fun insertUsers(users: List<User>): Completable {
         return userDao.insertUsers(users)
             .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun deleteUsers(): Completable {
